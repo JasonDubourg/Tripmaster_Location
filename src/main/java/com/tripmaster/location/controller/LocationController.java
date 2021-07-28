@@ -6,13 +6,12 @@ import com.tripmaster.location.dto.UserLocationDto;
 import com.tripmaster.location.repository.UserDatabase;
 import com.tripmaster.location.service.LocationService;
 import com.tripmaster.location.user.User;
+import com.tripmaster.location.user.UserPreferences;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,5 +49,14 @@ public class LocationController {
         userDatabase.initializeUserDatabase();
         User user  = userDatabase.getUser(userName);
         return locationService.getNearbyAttractions(user);
+    }
+
+    @PutMapping("/setUserPreferences")
+    public String setUserPreferences(@RequestParam("userName") String userName, @RequestBody UserPreferences userPreferences) {
+        userDatabase.initializeUserDatabase();
+        User user = userDatabase.getUser(userName);
+        user.setUserPreferences(userPreferences);
+        userDatabase.addUser(user);
+        return "Preferences successfully changed.";
     }
 }

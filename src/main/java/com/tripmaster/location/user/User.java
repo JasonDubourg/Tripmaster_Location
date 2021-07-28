@@ -17,7 +17,7 @@ public class User {
 	private Date latestLocationTimestamp;
 	private List<VisitedLocation> visitedLocations = new ArrayList<>();
 	private List<UserReward> userRewards = new ArrayList<>();
-//	private UserPreferences userPreferences = new UserPreferences();
+	private UserPreferences userPreferences = new UserPreferences();
 	private List<Provider> tripDeals = new ArrayList<>();
 	public User(UUID userId, String userName, String phoneNumber, String emailAddress) {
 		this.userId = userId;
@@ -80,13 +80,13 @@ public class User {
 		return userRewards;
 	}
 
-//	public UserPreferences getUserPreferences() {
-//		return userPreferences;
-//	}
-//
-//	public void setUserPreferences(UserPreferences userPreferences) {
-//		this.userPreferences = userPreferences;
-//	}
+	public UserPreferences getUserPreferences() {
+		return userPreferences;
+	}
+
+	public void setUserPreferences(UserPreferences userPreferences) {
+		this.userPreferences = userPreferences;
+	}
 
 	public VisitedLocation getLastVisitedLocation() {
 		VisitedLocation res = visitedLocations.get(visitedLocations.size() - 1);
